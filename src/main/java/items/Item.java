@@ -1,11 +1,15 @@
 package items;
 
+import java.time.LocalDateTime;
+
 public abstract class Item {
     private final String title;
     private final String author;
     private final int amount;
     private int availableAmount;
     private final String description;
+    private LocalDateTime borrowStart;
+    private LocalDateTime boorowEnd;
 
     public Item(String title, int amount, int availableAmount, String author, String description) {
         this.title = title;
@@ -13,6 +17,10 @@ public abstract class Item {
         this.availableAmount = availableAmount;
         this.author = author;
         this.description = description;
+    }
+
+    public int getAvailableAmount() {
+        return availableAmount;
     }
 
     public String getTitle() {
@@ -40,14 +48,15 @@ public abstract class Item {
     }
 
     public String getShortDescpription () { //miało być 50 znaków w zaokrągleniu do pełnego wyrazu...
+        if (description == null) return null;
+        if (description.length() <=50) return description;
         String[] descriptionArray = getDescription().split(" ");
-        if (descriptionArray.length < 6) return getDescription();
-
-        StringBuilder shortDescription = new StringBuilder();
-        for (int i = 0; i < 4; i ++) {
-            shortDescription.append(descriptionArray[i] + " ");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < descriptionArray.length; i++) {
+            result.append(descriptionArray[i]);
+            if (result.length() > 50) return result.toString();
+            result.append(" ");
         }
-        shortDescription.append(descriptionArray[4]);
-        return shortDescription.toString();
+        return result.toString();
     }
 }

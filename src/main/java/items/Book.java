@@ -17,4 +17,5 @@ public class Book extends Item {
     public BookType getBookType() {
         return bookType;
     }
+
 }

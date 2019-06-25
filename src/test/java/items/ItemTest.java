@@ -15,7 +15,7 @@ class ItemTest {
         String shortDescr = book.getShortDescpription();
 
         //Then
-        assertEquals("this is descpription of this", shortDescr);
+        assertEquals("this is descpription of this book and it is long version", shortDescr);
     }
 
 
